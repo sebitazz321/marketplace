@@ -1,0 +1,75 @@
+classDiagram
+    class Product {
+      +Int id
+      +String name
+      +String category
+      +Double price
+      +String emoji
+      +String description
+      +Double rating
+      +Int stock
+      +String seller
+      +Boolean active
+    }
+    class User {
+      +String uid
+      +String name
+      +String email
+      +Role role
+    }
+    class UserProfile {
+      +String name
+      +String email
+      +String phone
+      +String address
+      +String city
+      +Long createdAt
+    }
+    class Role {
+      <<enumeration>>
+      BUYER
+      ADMIN
+    }
+    class OrderSummary {
+      +String id
+      +Double total
+      +List~OrderItem~ items
+      +Long createdAt
+      +String status
+      +code() String
+      +units() Int
+    }
+    class OrderItem {
+      +Int productId
+      +String name
+      +Int quantity
+      +Double price
+    }
+    class MarketViewModel {
+      +User user
+      +List~Product~ catalog
+      +Map cart
+      +Set favorites
+      +List~OrderSummary~ orders
+      +login() register() logout()
+      +addToCart() checkout()
+      +updateProfile() toggleFavorite() loadOrders()
+      +saveProduct() deleteProduct() setProductActive() restock()
+    }
+    class CatalogStore {
+      +load() List~Product~
+      +save(List~Product~)
+      +reset()
+    }
+    class AdminConfig {
+      +ADMIN_EMAILS
+      +roleFor(email) Role
+    }
+    User --> Role
+    MarketViewModel --> User
+    MarketViewModel --> UserProfile
+    MarketViewModel --> Product
+    MarketViewModel --> OrderSummary
+    MarketViewModel --> CatalogStore
+    MarketViewModel ..> AdminConfig
+    OrderSummary *-- OrderItem

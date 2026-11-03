@@ -1,0 +1,14 @@
+{
+  "users/Xy12AbC": {
+    "name": "Ana Pérez", "email": "ana.qa@correo.com", "role": "comprador",
+    "phone": "3001234567", "address": "Cra 7 # 45-10", "city": "Bogotá",
+    "favorites": [1, 11], "createdAt": "2026-11-03T14:05:00Z", "updatedAt": "2026-11-03T14:10:00Z"
+  },
+  "carts/Xy12AbC": { "items": { "3": 2, "11": 1 }, "updatedAt": "2026-11-03T14:12:00Z" },
+  "orders/k9Q2mZpL7": {
+    "uid": "Xy12AbC", "email": "ana.qa@correo.com",
+    "items": [{ "productId": 3, "name": "Cargador rápido 65W", "quantity": 2, "price": 59900 }],
+    "subtotal": 119800, "shipping": 12000, "total": 131800,
+    "shippingAddress": "Cra 7 # 45-10, Bogotá", "status": "Confirmado", "createdAt": "2026-11-03T14:15:00Z"
+  }
+}

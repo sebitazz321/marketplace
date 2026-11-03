@@ -1,0 +1,33 @@
+{
+  "$comment": "Esquema de Cloud Firestore de Marketplace v2.0. Las reglas de seguridad no cambian (firebase/firestore.rules).",
+  "users/{uid}": {
+    "name": "string",
+    "email": "string",
+    "role": "string  // 'comprador' | 'admin' (informativo; el rol real lo decide AdminConfig)",
+    "phone": "string?",
+    "address": "string?",
+    "city": "string?",
+    "favorites": "number[]  // ids de producto",
+    "createdAt": "timestamp",
+    "updatedAt": "timestamp?"
+  },
+  "carts/{uid}": {
+    "items": "map<string, number>  // { \"3\": 2, \"5\": 1 }",
+    "updatedAt": "timestamp"
+  },
+  "orders/{id}": {
+    "uid": "string",
+    "email": "string",
+    "items": [{ "productId": "number", "name": "string", "quantity": "number", "price": "number" }],
+    "subtotal": "number",
+    "shipping": "number",
+    "total": "number",
+    "shippingAddress": "string",
+    "status": "string  // 'Confirmado'",
+    "createdAt": "timestamp"
+  },
+  "local:CatalogStore(products_v1)": [{
+    "id": "number", "name": "string", "category": "string", "price": "number", "emoji": "string",
+    "description": "string", "rating": "number", "stock": "number", "seller": "string", "active": "boolean"
+  }]
+}

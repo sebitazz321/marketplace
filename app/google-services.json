@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "666448268429",
+    "project_id": "marketplace-bdf94",
+    "storage_bucket": "marketplace-bdf94.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:666448268429:android:e584a969e69bacdf2126c4",
+        "android_client_info": {
+          "package_name": "com.optativa.marketplace"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBCqdeCIMB7L0TUFPnw6tD6RDJtKvaO4ac"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

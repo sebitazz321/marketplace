@@ -1,0 +1,13 @@
+flowchart LR
+    S([Inicio de la app]) --> Q{¿Sesión activa?}
+    Q -- No --> L[AuthScreen<br/>login · registro · recuperar]
+    L --> R{"AdminConfig.roleFor(email)"}
+    Q -- Sí --> R
+    R -- Comprador --> C[Catálogo]
+    C <--> CA[Carrito]
+    CA <--> AS[Asistente Mari]
+    AS <--> PC[Perfil comprador<br/>datos · favoritos · pedidos]
+    R -- Administrador --> P[Panel<br/>indicadores]
+    P <--> PR[Productos<br/>CRUD · stock · ocultar]
+    PR <--> T[Tienda<br/>vista previa]
+    T <--> PA[Perfil admin<br/>datos · permisos]

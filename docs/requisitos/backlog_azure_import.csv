@@ -1,0 +1,76 @@
+﻿Work Item Type,Title 1,Title 2,Effort,Remaining Work,Tags
+Product Backlog Item,Estructura del proyecto y tema visual,,3,,Sprint1
+Task,,Crear proyecto Android y dependencias,,2,Sprint1
+Task,,Definir tema Material 3 claro/oscuro,,2,Sprint1
+Product Backlog Item,Configurar Firebase en el proyecto,,3,,Sprint1
+Task,,Crear proyecto en la consola de Firebase y agregar la app Android,,2,Sprint1
+Task,,Agregar google-services.json y dependencias,,1,Sprint1
+Task,,Habilitar Authentication y crear Firestore con reglas,,2,Sprint1
+Product Backlog Item,Registro de usuario,,5,,Sprint1
+Task,,Pantalla de registro,,3,Sprint1
+Task,,"Validadores de nombre, correo y contraseña",,3,Sprint1
+Task,,Registro con Firebase Auth y documento users/{uid},,3,Sprint1
+Product Backlog Item,Inicio y cierre de sesión,,5,,Sprint1
+Task,,Pantalla de login,,3,Sprint1
+Task,,Persistencia de sesión con Firebase,,2,Sprint1
+Task,,Botón salir,,1,Sprint1
+Product Backlog Item,Recuperar contraseña por correo,,2,,Sprint1
+Task,,Botón «¿Olvidaste tu contraseña?» con sendPasswordResetEmail,,2,Sprint1
+Task,,Traducir errores de Firebase a español (AuthErrors),,2,Sprint1
+Product Backlog Item,Navegación inferior y barra superior,,3,,Sprint1
+Task,,Barra de navegación con 3 pestañas,,3,Sprint1
+Product Backlog Item,Catálogo de productos en cuadrícula,,5,,Sprint2
+Task,,Modelo Product y repositorio local,,3,Sprint2
+Task,,Tarjeta de producto,,3,Sprint2
+Task,,Cuadrícula de 2 columnas,,2,Sprint2
+Product Backlog Item,Detalle del producto,,3,,Sprint2
+Task,,"Diálogo con descripción, vendedor y stock",,3,Sprint2
+Product Backlog Item,Búsqueda por texto,,5,,Sprint2
+Task,,Campo de búsqueda,,2,Sprint2
+Task,,Algoritmo CatalogSearch sin tildes,,3,Sprint2
+Product Backlog Item,Filtro por categoría,,3,,Sprint2
+Task,,Chips de categorías,,3,Sprint2
+Product Backlog Item,Chatbot Mari: recomendaciones,,8,,Sprint2
+Task,,Implementar MarketBot (categoría y presupuesto),,6,Sprint2
+Task,,Pantalla de chat con tarjetas de producto,,5,Sprint2
+Product Backlog Item,Carrito de compras,,8,,Sprint3
+Task,,"Operaciones CartOps (agregar, restar, quitar)",,4,Sprint3
+Task,,Pantalla del carrito,,5,Sprint3
+Task,,Insignia con cantidad en la barra inferior,,1,Sprint3
+Product Backlog Item,Persistencia del carrito por usuario en la nube,,5,,Sprint3
+Task,,Conversión del carrito a mapa de Firestore (CartSerializer),,2,Sprint3
+Task,,Guardar y cargar carts/{uid},,3,Sprint3
+Product Backlog Item,Resumen de compra y finalización,,5,,Sprint3
+Task,,"Cálculo de subtotal, envío y total (Pricing)",,3,Sprint3
+Task,,Guardar pedido en orders/{id} y diálogo de confirmación,,3,Sprint3
+Product Backlog Item,Chatbot: carrito y políticas de la tienda,,3,,Sprint3
+Task,,"Respuestas de carrito, envío, pagos y devoluciones",,3,Sprint3
+Product Backlog Item,Pruebas unitarias,,5,,Sprint3
+Task,,"LogicTest (búsqueda, carrito, precios, validadores)",,4,Sprint3
+Task,,MarketBotTest,,3,Sprint3
+Product Backlog Item,Pipeline de integración continua y documentación,,3,,Sprint3
+Task,,Crear azure-pipelines.yml y ejecutarlo,,3,Sprint3
+Task,,Completar README y evidencias,,2,Sprint3
+Bug,Palabras como «laptop» activaban la intención «top ventas» del chatbot (corregido),,,,Sprint3
+Product Backlog Item,Roles Comprador / Administrador,,3,,Sprint4
+Task,,Enum Role y AdminConfig,,2,Sprint4
+Task,,Navegación inferior según el rol,,2,Sprint4
+Product Backlog Item,Perfil del comprador,,5,,Sprint4
+Task,,Pantalla de perfil con datos y edición,,4,Sprint4
+Task,,"Validadores de teléfono, dirección y ciudad",,2,Sprint4
+Product Backlog Item,Favoritos,,3,,Sprint4
+Task,,Corazón en tarjeta y filtro de favoritos,,3,Sprint4
+Task,,Guardar favoritos en users/{uid},,1,Sprint4
+Product Backlog Item,Historial de pedidos,,3,,Sprint4
+Task,,Consulta de orders por uid y OrderParser,,3,Sprint4
+Task,,Tarjetas de pedido con detalle,,2,Sprint4
+Product Backlog Item,Panel de administración,,5,,Sprint4
+Task,,Indicadores de inventario (Inventory),,3,Sprint4
+Task,,Gráfico de valor por categoría y stock bajo,,3,Sprint4
+Product Backlog Item,Gestión de productos (CRUD),,8,,Sprint4
+Task,,Formulario con ProductValidator,,4,Sprint4
+Task,,CatalogOps y CatalogStore local,,4,Sprint4
+Task,,"Publicar/ocultar, reabastecer y restaurar",,3,Sprint4
+Product Backlog Item,Pruebas y documentación de perfiles,,5,,Sprint4
+Task,,AdminLogicTest y ProfileLogicTest,,4,Sprint4
+Task,,"Carpeta Documentacion (IEEE, matrices y manuales)",,6,Sprint4

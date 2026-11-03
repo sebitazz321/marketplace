@@ -1,0 +1,53 @@
+erDiagram
+    USERS ||--o| CARTS : "tiene 1 carrito"
+    USERS ||--o{ ORDERS : "realiza"
+    USERS }o--o{ PRODUCTS : "favoritos"
+    ORDERS ||--|{ ORDER_ITEMS : "contiene"
+    PRODUCTS ||--o{ ORDER_ITEMS : "se vende en"
+    CARTS }o--o{ PRODUCTS : "items (id -> cantidad)"
+    USERS {
+        string uid PK "UID de Firebase Auth"
+        string name
+        string email
+        string role "comprador | admin"
+        string phone "opcional"
+        string address "opcional"
+        string city "opcional"
+        int_array favorites "ids de producto"
+        timestamp createdAt
+        timestamp updatedAt
+    }
+    CARTS {
+        string uid PK "= users.uid"
+        map items "{ productId: cantidad }"
+        timestamp updatedAt
+    }
+    ORDERS {
+        string id PK "autogenerado"
+        string uid FK "dueño del pedido"
+        string email
+        number subtotal
+        number shipping
+        number total
+        string shippingAddress
+        string status
+        timestamp createdAt
+    }
+    ORDER_ITEMS {
+        int productId FK
+        string name
+        int quantity
+        number price
+    }
+    PRODUCTS {
+        int id PK
+        string name
+        string category
+        number price "COP"
+        string emoji
+        string description
+        number rating
+        int stock
+        string seller
+        bool active "visible para compradores"
+    }

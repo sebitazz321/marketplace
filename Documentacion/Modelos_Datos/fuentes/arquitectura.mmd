@@ -1,0 +1,25 @@
+flowchart TB
+    subgraph APP["App Android · Kotlin + Jetpack Compose (Material 3)"]
+      direction TB
+      UB["<b>Vistas Comprador</b><br/>CatalogScreen · CartScreen<br/>ChatScreen · ProfileScreen"]
+      UA["<b>Vistas Administrador</b><br/>AdminDashboardScreen · AdminProductsScreen<br/>CatalogScreen (vista previa) · ProfileScreen"]
+      AU["<b>Acceso</b><br/>AuthScreen"]
+      VM["<b>MarketViewModel</b><br/>estado observable + casos de uso"]
+      L1["<b>Lógica de compra</b><br/>CatalogSearch · CartOps<br/>Pricing · MarketBot"]
+      L2["<b>Lógica de perfiles</b><br/>AdminConfig · ProfileValidator<br/>OrderParser · Validators"]
+      L3["<b>Lógica de administración</b><br/>CatalogOps · Inventory<br/>ProductValidator"]
+      ST[("CatalogStore<br/>SharedPreferences")]
+      AU --> VM
+      UB --> VM
+      UA --> VM
+      VM --> L1
+      VM --> L2
+      VM --> L3
+      VM --> ST
+    end
+    subgraph FB["Firebase (configuración y reglas sin cambios)"]
+      AUTH[("Authentication")]
+      FS[("Cloud Firestore<br/>users · carts · orders")]
+    end
+    VM --> AUTH
+    VM --> FS
