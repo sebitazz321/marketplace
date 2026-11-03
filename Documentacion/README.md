@@ -21,6 +21,11 @@ Documentacion/
 │   ├── Manual_Instalacion
 │   ├── Manual_Tecnico
 │   └── Manual_Usuario
+├── 04_Casos_Uso_y_Prueba/
+│   ├── Casos_Uso                       14 casos de uso (UML 2.5) con flujos y diagramas
+│   ├── Especificacion_Casos_Prueba     30 casos de prueba detallados por caso de uso (IEEE 829)
+│   ├── Matriz_CasosUso_CasosPrueba.xlsx  trazabilidad caso de uso ↔ caso de prueba
+│   └── Diagramas/                      diagramas de casos de uso Comprador y Administrador (PNG + SVG)
 ├── Modelos_Datos/                    diagramas ER, clases, arquitectura, navegación y esquema Firestore
 └── Documentacion_Firebase            configuración, modelo de datos y reglas
 ```

@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="950" viewBox="0 0 1100 950" font-family="Arial, Helvetica, sans-serif">
+<defs><marker id="arr" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="9" markerHeight="9" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10" fill="none" stroke="#555" stroke-width="1.6"/></marker></defs>
+<rect width="1100" height="950" fill="#fff"/>
+<rect x="230" y="40" width="560" height="890" rx="10" fill="#FAFCFC" stroke="#0F8B7D" stroke-width="2.2"/>
+<text x="510.0" y="68" text-anchor="middle" font-size="17" font-weight="700" fill="#0F8B7D">Marketplace — Perfil Comprador</text>
+<line x1="116" y1="135" x2="360.0" y2="120.0" stroke="#7A8C89" stroke-width="1.4"/>
+<line x1="116" y1="510" x2="360.0" y2="202.0" stroke="#7A8C89" stroke-width="1.4"/>
+<line x1="116" y1="510" x2="360.0" y2="284.0" stroke="#7A8C89" stroke-width="1.4"/>
+<line x1="116" y1="510" x2="360.0" y2="366.0" stroke="#7A8C89" stroke-width="1.4"/>
+<line x1="116" y1="510" x2="360.0" y2="448.0" stroke="#7A8C89" stroke-width="1.4"/>
+<line x1="116" y1="510" x2="360.0" y2="530.0" stroke="#7A8C89" stroke-width="1.4"/>
+<line x1="116" y1="510" x2="360.0" y2="612.0" stroke="#7A8C89" stroke-width="1.4"/>
+<line x1="116" y1="510" x2="360.0" y2="694.0" stroke="#7A8C89" stroke-width="1.4"/>
+<line x1="116" y1="510" x2="360.0" y2="776.0" stroke="#7A8C89" stroke-width="1.4"/>
+<line x1="116" y1="510" x2="360.0" y2="858.0" stroke="#7A8C89" stroke-width="1.4"/>
+<line x1="890" y1="335" x2="660.0" y2="120.0" stroke="#9FB0AD" stroke-width="1.3" stroke-dasharray="2 3"/>
+<line x1="890" y1="335" x2="660.0" y2="202.0" stroke="#9FB0AD" stroke-width="1.3" stroke-dasharray="2 3"/>
+<line x1="890" y1="335" x2="660.0" y2="284.0" stroke="#9FB0AD" stroke-width="1.3" stroke-dasharray="2 3"/>
+<line x1="890" y1="335" x2="660.0" y2="448.0" stroke="#9FB0AD" stroke-width="1.3" stroke-dasharray="2 3"/>
+<line x1="890" y1="335" x2="660.0" y2="530.0" stroke="#9FB0AD" stroke-width="1.3" stroke-dasharray="2 3"/>
+<line x1="890" y1="335" x2="660.0" y2="612.0" stroke="#9FB0AD" stroke-width="1.3" stroke-dasharray="2 3"/>
+<line x1="890" y1="335" x2="660.0" y2="776.0" stroke="#9FB0AD" stroke-width="1.3" stroke-dasharray="2 3"/>
+<line x1="890" y1="335" x2="660.0" y2="858.0" stroke="#9FB0AD" stroke-width="1.3" stroke-dasharray="2 3"/>
+<path d="M660.0,612 C706.0,612 706.0,530 660.0,530" fill="none" stroke="#555" stroke-width="1.5" stroke-dasharray="6 4" marker-end="url(#arr)"/>
+<text x="710.0" y="575.0" font-size="12" fill="#555">«include»</text>
+<path d="M660.0,448 C706.0,448 706.0,366 660.0,366" fill="none" stroke="#555" stroke-width="1.5" stroke-dasharray="6 4" marker-end="url(#arr)"/>
+<text x="710.0" y="411.0" font-size="12" fill="#555">«extend»</text>
+<ellipse cx="510.0" cy="120" rx="150" ry="32" fill="#E6F4F1" stroke="#0F8B7D" stroke-width="2"/>
+<text x="510.0" y="115" text-anchor="middle" font-size="12" font-weight="700" fill="#0F8B7D">CU-01</text>
+<text x="510.0" y="133" text-anchor="middle" font-size="14" fill="#1F3B38">Registrarse</text>
+<ellipse cx="510.0" cy="202" rx="150" ry="32" fill="#E6F4F1" stroke="#0F8B7D" stroke-width="2"/>
+<text x="510.0" y="197" text-anchor="middle" font-size="12" font-weight="700" fill="#0F8B7D">CU-02</text>
+<text x="510.0" y="215" text-anchor="middle" font-size="14" fill="#1F3B38">Iniciar y cerrar sesión</text>
+<ellipse cx="510.0" cy="284" rx="150" ry="32" fill="#E6F4F1" stroke="#0F8B7D" stroke-width="2"/>
+<text x="510.0" y="279" text-anchor="middle" font-size="12" font-weight="700" fill="#0F8B7D">CU-03</text>
+<text x="510.0" y="297" text-anchor="middle" font-size="14" fill="#1F3B38">Recuperar contraseña</text>
+<ellipse cx="510.0" cy="366" rx="150" ry="32" fill="#E6F4F1" stroke="#0F8B7D" stroke-width="2"/>
+<text x="510.0" y="361" text-anchor="middle" font-size="12" font-weight="700" fill="#0F8B7D">CU-04</text>
+<text x="510.0" y="379" text-anchor="middle" font-size="14" fill="#1F3B38">Explorar y buscar productos</text>
+<ellipse cx="510.0" cy="448" rx="150" ry="32" fill="#E6F4F1" stroke="#0F8B7D" stroke-width="2"/>
+<text x="510.0" y="443" text-anchor="middle" font-size="12" font-weight="700" fill="#0F8B7D">CU-05</text>
+<text x="510.0" y="461" text-anchor="middle" font-size="14" fill="#1F3B38">Gestionar favoritos</text>
+<ellipse cx="510.0" cy="530" rx="150" ry="32" fill="#E6F4F1" stroke="#0F8B7D" stroke-width="2"/>
+<text x="510.0" y="525" text-anchor="middle" font-size="12" font-weight="700" fill="#0F8B7D">CU-06</text>
+<text x="510.0" y="543" text-anchor="middle" font-size="14" fill="#1F3B38">Gestionar carrito</text>
+<ellipse cx="510.0" cy="612" rx="150" ry="32" fill="#E6F4F1" stroke="#0F8B7D" stroke-width="2"/>
+<text x="510.0" y="607" text-anchor="middle" font-size="12" font-weight="700" fill="#0F8B7D">CU-07</text>
+<text x="510.0" y="625" text-anchor="middle" font-size="14" fill="#1F3B38">Finalizar compra</text>
+<ellipse cx="510.0" cy="694" rx="150" ry="32" fill="#E6F4F1" stroke="#0F8B7D" stroke-width="2"/>
+<text x="510.0" y="689" text-anchor="middle" font-size="12" font-weight="700" fill="#0F8B7D">CU-08</text>
+<text x="510.0" y="707" text-anchor="middle" font-size="14" fill="#1F3B38">Consultar asistente Mari</text>
+<ellipse cx="510.0" cy="776" rx="150" ry="32" fill="#E6F4F1" stroke="#0F8B7D" stroke-width="2"/>
+<text x="510.0" y="771" text-anchor="middle" font-size="12" font-weight="700" fill="#0F8B7D">CU-09</text>
+<text x="510.0" y="789" text-anchor="middle" font-size="14" fill="#1F3B38">Gestionar perfil</text>
+<ellipse cx="510.0" cy="858" rx="150" ry="32" fill="#E6F4F1" stroke="#0F8B7D" stroke-width="2"/>
+<text x="510.0" y="853" text-anchor="middle" font-size="12" font-weight="700" fill="#0F8B7D">CU-10</text>
+<text x="510.0" y="871" text-anchor="middle" font-size="14" fill="#1F3B38">Consultar historial de pedidos</text>
+<g stroke="#1F3B38" stroke-width="2.2" fill="none">
+  <circle cx="90" cy="95" r="13" fill="#fff"/>
+  <line x1="90" y1="108" x2="90" y2="147"/>
+  <line x1="66" y1="122" x2="114" y2="122"/>
+  <line x1="90" y1="147" x2="70" y2="177"/>
+  <line x1="90" y1="147" x2="110" y2="177"/>
+</g>
+<text x="90" y="199" text-anchor="middle" font-size="16" font-weight="700" fill="#1F3B38">Visitante</text>
+<g stroke="#1F3B38" stroke-width="2.2" fill="none">
+  <circle cx="90" cy="470" r="13" fill="#fff"/>
+  <line x1="90" y1="483" x2="90" y2="522"/>
+  <line x1="66" y1="497" x2="114" y2="497"/>
+  <line x1="90" y1="522" x2="70" y2="552"/>
+  <line x1="90" y1="522" x2="110" y2="552"/>
+</g>
+<text x="90" y="574" text-anchor="middle" font-size="16" font-weight="700" fill="#1F3B38">Comprador</text>
+<rect x="890" y="300" width="140" height="70" rx="6" fill="#F3F5F5" stroke="#1F3B38" stroke-width="1.8"/>
+<text x="960" y="322" text-anchor="middle" font-size="12" fill="#555">«sistema»</text>
+<text x="960" y="342" text-anchor="middle" font-size="15" font-weight="700" fill="#1F3B38">Firebase</text>
+<text x="960" y="360" text-anchor="middle" font-size="12" fill="#555">Auth + Firestore</text>
+</svg>
