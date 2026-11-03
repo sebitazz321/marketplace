@@ -423,7 +423,7 @@ class MarketViewModel(app: Application) : AndroidViewModel(app) {
             )
         ).addOnSuccessListener { loadOrders() }
 
-        setCatalog(CatalogOps.applyOrder(catalog, lines.associate { it.product.id to it.quantity }))
+        updateCatalog(CatalogOps.applyOrder(catalog, lines.associate { it.product.id to it.quantity }))
         lastOrder = "${OrderParser.code(ref.id)} · total ${Pricing.format(total)}" +
             if (shippingTo.isNotBlank()) "\nEnvío a: $shippingTo" else ""
         updateCart(emptyMap())
@@ -433,7 +433,7 @@ class MarketViewModel(app: Application) : AndroidViewModel(app) {
 
     // ------------------------------------------------------------ administración del catálogo
 
-    private fun setCatalog(newCatalog: List<Product>) {
+    private fun updateCatalog(newCatalog: List<Product>) {
         catalog = newCatalog
         store.save(newCatalog)
     }
@@ -446,26 +446,26 @@ class MarketViewModel(app: Application) : AndroidViewModel(app) {
     fun saveProduct(p: Product) {
         if (!requireAdmin()) return
         val isNew = catalog.none { it.id == p.id }
-        setCatalog(CatalogOps.upsert(catalog, p))
+        updateCatalog(CatalogOps.upsert(catalog, p))
         adminMessage = if (isNew) "✅ Producto «${p.name}» creado." else "✅ Producto «${p.name}» actualizado."
     }
 
     fun deleteProduct(id: Int) {
         if (!requireAdmin()) return
         val name = productById(id)?.name ?: "Producto"
-        setCatalog(CatalogOps.delete(catalog, id))
+        updateCatalog(CatalogOps.delete(catalog, id))
         if (cart.containsKey(id)) updateCart(CartOps.remove(cart, id))
         adminMessage = "🗑️ «$name» eliminado del catálogo."
     }
 
     fun setProductActive(id: Int, active: Boolean) {
         if (!requireAdmin()) return
-        setCatalog(CatalogOps.setActive(catalog, id, active))
+        updateCatalog(CatalogOps.setActive(catalog, id, active))
     }
 
     fun restock(id: Int, delta: Int) {
         if (!requireAdmin()) return
-        setCatalog(CatalogOps.adjustStock(catalog, id, delta))
+        updateCatalog(CatalogOps.adjustStock(catalog, id, delta))
     }
 
     fun resetCatalog() {
