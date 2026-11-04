@@ -26,6 +26,9 @@ Documentacion/
 │   ├── Especificacion_Casos_Prueba     30 casos de prueba detallados por caso de uso (IEEE 829)
 │   ├── Matriz_CasosUso_CasosPrueba.xlsx  trazabilidad caso de uso ↔ caso de prueba
 │   └── Diagramas/                      diagramas de casos de uso Comprador y Administrador (PNG + SVG)
+├── 05_Mockups/                       mockups de alta fidelidad de las pantallas, diseño y accesibilidad
+├── 06_Seguridad/                     pruebas OWASP MASVS, análisis estático (mobsfscan antes/después), vulnerabilidades, re-pruebas, Kali/BadStore
+├── 07_Agente_IA/                     agente de IA «Mari»: propósito, Gemini, controles, protección de la clave y escenarios de prueba
 ├── Modelos_Datos/                    diagramas ER, clases, arquitectura, navegación y esquema Firestore
 └── Documentacion_Firebase            configuración, modelo de datos y reglas
 ```

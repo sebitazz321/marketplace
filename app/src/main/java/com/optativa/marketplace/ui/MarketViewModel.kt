@@ -15,13 +15,24 @@ import com.google.firebase.auth.UserProfileChangeRequest
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
+import com.optativa.marketplace.BuildConfig
 import com.optativa.marketplace.data.AdminConfig
+import com.optativa.marketplace.data.GeminiClient
 import com.optativa.marketplace.data.CatalogStore
 import com.optativa.marketplace.data.Product
 import com.optativa.marketplace.data.Role
 import com.optativa.marketplace.data.User
 import com.optativa.marketplace.data.UserProfile
+import com.optativa.marketplace.logic.AiErrorMapper
+import com.optativa.marketplace.logic.AiHistory
+import com.optativa.marketplace.logic.AiInputGuard
+import com.optativa.marketplace.logic.AiRateLimiter
+import com.optativa.marketplace.logic.AiResponseGuard
 import com.optativa.marketplace.logic.AuthErrors
+import com.optativa.marketplace.logic.InputCheck
+import com.optativa.marketplace.logic.MarketAiPrompt
+import com.optativa.marketplace.logic.MsgSource
+import com.optativa.marketplace.logic.Turn
 import com.optativa.marketplace.logic.CartLine
 import com.optativa.marketplace.logic.CartOps
 import com.optativa.marketplace.logic.CartSerializer
@@ -32,10 +43,11 @@ import com.optativa.marketplace.logic.OrderSummary
 import com.optativa.marketplace.logic.Pricing
 import com.optativa.marketplace.logic.ProfileValidator
 import com.optativa.marketplace.logic.Validators
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
-data class ChatMessage(val text: String, val fromUser: Boolean, val products: List<Product> = emptyList())
+data class ChatMessage(val text: String, val source: MsgSource, val products: List<Product> = emptyList()) {
+    val fromUser: Boolean get() = source == MsgSource.USER
+}
 
 /**
  * Estado de la app.
@@ -110,9 +122,12 @@ class MarketViewModel(app: Application) : AndroidViewModel(app) {
     fun dismissAdminMessage() { adminMessage = null }
 
     // ---- chatbot
-    val chat = mutableStateListOf(ChatMessage(MarketBot(emptyList()).greeting(), fromUser = false))
+    val chat = mutableStateListOf(ChatMessage(MarketBot(emptyList()).greeting(), MsgSource.LOCAL))
     var typing by mutableStateOf(false)
         private set
+    private val ai = GeminiClient(BuildConfig.GEMINI_API_KEY)
+    private val aiLimiter = AiRateLimiter()
+    val aiEnabled: Boolean get() = ai.isConfigured
 
     val cartLines: List<CartLine> get() = CartOps.lines(cart, products)
     val cartCount: Int get() = cartLines.sumOf { it.quantity }
@@ -251,7 +266,7 @@ class MarketViewModel(app: Application) : AndroidViewModel(app) {
         category = null
         clearMessages()
         chat.clear()
-        chat.add(ChatMessage(MarketBot(emptyList()).greeting(), fromUser = false))
+        chat.add(ChatMessage(MarketBot(emptyList()).greeting(), MsgSource.LOCAL))
     }
 
     // ------------------------------------------------------------ perfil (Firestore users/{uid})
@@ -476,17 +491,41 @@ class MarketViewModel(app: Application) : AndroidViewModel(app) {
 
     // ------------------------------------------------------------ chatbot
 
+    /**
+     * Agente "Mari" (híbrido):
+     *  1. Valida la entrada (longitud, caracteres, intentos de manipular las instrucciones).
+     *  2. El motor local [MarketBot] busca productos reales del catálogo y calcula el carrito.
+     *  3. Gemini redacta la respuesta con ese contexto; las tarjetas de productos salen del motor local.
+     *  4. Si la IA no está configurada o falla → respuesta local con aviso.
+     */
     fun send(text: String) {
-        val clean = text.trim()
-        if (clean.isEmpty() || typing) return
-        chat.add(ChatMessage(clean, fromUser = true))
+        if (typing) return
+        val clean = when (val check = AiInputGuard.check(text)) {
+            is InputCheck.Ok -> check.text
+            is InputCheck.Rejected -> {
+                if (text.isNotBlank()) chat.add(ChatMessage(text.trim().take(80), MsgSource.USER))
+                chat.add(ChatMessage(check.reason, MsgSource.LOCAL))
+                return
+            }
+        }
+        val history = AiHistory.trim(chat.map { Turn(if (it.fromUser) Turn.USER else Turn.MODEL, it.text) })
+        chat.add(ChatMessage(clean, MsgSource.USER))
         typing = true
         val snapshot = cartLines
-        val bot = MarketBot(products)
+        val catalogNow = products
+        val bot = MarketBot(catalogNow)
         viewModelScope.launch {
-            delay(500)
-            val r = bot.reply(clean, snapshot)
-            chat.add(ChatMessage(r.text, fromUser = false, products = r.products))
+            val local = bot.reply(clean, snapshot)
+            val reply = when {
+                !ai.isConfigured -> ChatMessage(local.text, MsgSource.LOCAL, local.products)
+                !aiLimiter.tryAcquire() -> ChatMessage("${local.text}\n\n${AiErrorMapper.fallbackNote(AiErrorMapper.RATE_LIMITED_LOCAL)}", MsgSource.LOCAL, local.products)
+                else -> when (val r = ai.generate(MarketAiPrompt.system(catalogNow, snapshot, local.text), history, clean)) {
+                    is GeminiClient.Result.Ok -> AiResponseGuard.clean(r.text)?.let { ChatMessage(it, MsgSource.AI, local.products) }
+                        ?: ChatMessage("${local.text}\n\n${AiErrorMapper.fallbackNote(AiErrorMapper.BAD_RESPONSE)}", MsgSource.LOCAL, local.products)
+                    is GeminiClient.Result.Fail -> ChatMessage("${local.text}\n\n${AiErrorMapper.fallbackNote(r.reason)}", MsgSource.LOCAL, local.products)
+                }
+            }
+            chat.add(reply)
             typing = false
         }
     }

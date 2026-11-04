@@ -29,11 +29,15 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.optativa.marketplace.data.Product
+import com.optativa.marketplace.logic.AiConfig
 import com.optativa.marketplace.logic.MarketBot
+import com.optativa.marketplace.logic.MsgSource
 import com.optativa.marketplace.logic.Pricing
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -48,6 +52,16 @@ fun ChatScreen(vm: MarketViewModel, modifier: Modifier = Modifier) {
     }
 
     Column(modifier.background(MaterialTheme.colorScheme.background)) {
+        Surface(color = MaterialTheme.colorScheme.secondaryContainer, modifier = Modifier.fillMaxWidth()) {
+            Text(
+                if (vm.aiEnabled) "🤖 Mari es un asistente con inteligencia artificial (${AiConfig.PROVIDER}). Puede equivocarse: verifica precios y stock en el catálogo. Nunca compartas contraseñas ni datos de tarjetas."
+                else "⚙️ Mari está en modo local sin IA (falta configurar GEMINI_API_KEY).",
+                style = MaterialTheme.typography.labelSmall,
+                modifier = Modifier
+                    .padding(horizontal = 12.dp, vertical = 6.dp)
+                    .testTag("ai_disclosure")
+            )
+        }
         LazyColumn(
             state = listState,
             modifier = Modifier
@@ -58,7 +72,7 @@ fun ChatScreen(vm: MarketViewModel, modifier: Modifier = Modifier) {
             contentPadding = PaddingValues(vertical = 12.dp)
         ) {
             items(vm.chat) { msg -> Bubble(msg, inCart = { vm.cart[it.id] ?: 0 }, onAdd = { vm.addToCart(it) }) }
-            if (vm.typing) item { Bubble(ChatMessage("Mari está escribiendo…", fromUser = false), { 0 }, {}) }
+            if (vm.typing) item { Bubble(ChatMessage("Mari está escribiendo…", MsgSource.LOCAL), { 0 }, {}) }
         }
 
         LazyRow(
@@ -80,6 +94,9 @@ fun ChatScreen(vm: MarketViewModel, modifier: Modifier = Modifier) {
                 onValueChange = { input = it },
                 placeholder = { Text("Pregúntale a Mari…") },
                 maxLines = 3,
+                supportingText = if (input.length > AiConfig.MAX_INPUT_CHARS - 50) {
+                    { Text("${input.length}/${AiConfig.MAX_INPUT_CHARS}") }
+                } else null,
                 modifier = Modifier
                     .weight(1f)
                     .testTag("chat_input")
@@ -110,7 +127,19 @@ private fun Bubble(msg: ChatMessage, inCart: (Product) -> Int, onAdd: (Product) 
             modifier = Modifier.widthIn(max = 320.dp)
         ) {
             Column(Modifier.padding(horizontal = 14.dp, vertical = 10.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
-                Text(msg.text)
+                if (!msg.fromUser) {
+                    Text(
+                        if (msg.source == MsgSource.AI) "🤖 IA · ${AiConfig.PROVIDER}" else "⚙️ Respuesta local",
+                        style = MaterialTheme.typography.labelSmall,
+                        color = MaterialTheme.colorScheme.primary
+                    )
+                }
+                Text(
+                    msg.text,
+                    modifier = Modifier.semantics {
+                        contentDescription = (if (msg.fromUser) "Tú: " else if (msg.source == MsgSource.AI) "Mari, con IA: " else "Mari: ") + msg.text
+                    }
+                )
                 msg.products.forEach { p ->
                     Surface(
                         shape = RoundedCornerShape(12.dp),
@@ -131,6 +160,7 @@ private fun Bubble(msg: ChatMessage, inCart: (Product) -> Int, onAdd: (Product) 
                             }
                             OutlinedButton(
                                 onClick = { onAdd(p) },
+                                modifier = Modifier.semantics { contentDescription = "Agregar ${p.name} al carrito" },
                                 enabled = inCart(p) < p.stock,
                                 contentPadding = PaddingValues(horizontal = 10.dp, vertical = 2.dp)
                             ) { Text(if (inCart(p) > 0) "+${inCart(p)}" else "Agregar") }

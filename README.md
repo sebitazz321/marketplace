@@ -82,6 +82,18 @@ Este proyecto necesita tu propio `app/google-services.json`. Sigue [`docs/fireba
 | Pedidos | Firestore `orders/{id}` |
 | Catálogo (administrable) | Local (`CatalogStore`, semilla `ProductRepository`) |
 
+## Agente de IA «Mari» (Google Gemini)
+
+El chat es un **agente híbrido**: el motor local de reglas calcula los datos exactos de la app y **Google Gemini** (`gemini-3.5-flash-lite`) redacta la respuesta. Si la IA no está configurada o falla (sin internet, clave inválida, límite de uso), responde el motor local y se informa el motivo. Cada mensaje indica si viene de la IA (🤖) o del modo local (⚙️).
+
+**Configurar la clave (no se sube a Git):**
+
+1. Crea una clave gratis en https://aistudio.google.com/apikey
+2. En `local.properties` (raíz del proyecto) agrega: `GEMINI_API_KEY=tu_clave`
+3. **File → Sync Project with Gradle Files** y ▶ Run.
+
+Detalles en `Documentacion/07_Agente_IA/`. Seguridad en `Documentacion/06_Seguridad/`.
+
 ## Cómo ejecutar
 
 1. Abre **Android Studio** (Koala o superior) → *Open* → selecciona esta carpeta.

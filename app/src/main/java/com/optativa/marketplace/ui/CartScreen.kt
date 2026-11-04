@@ -25,6 +25,8 @@ import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -84,13 +86,13 @@ fun CartScreen(vm: MarketViewModel, modifier: Modifier = Modifier, onGoShopping:
                                 Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(6.dp)) {
                                     FilledTonalIconButton(
                                         onClick = { vm.decrement(line.product.id) },
-                                        modifier = Modifier.size(32.dp)
+                                        modifier = Modifier.size(32.dp).semantics { contentDescription = "Quitar una unidad de ${line.product.name}" }
                                     ) { Text("−") }
                                     Text("${line.quantity}", fontWeight = FontWeight.Bold)
                                     FilledTonalIconButton(
                                         onClick = { vm.addToCart(line.product) },
                                         enabled = line.quantity < line.product.stock,
-                                        modifier = Modifier.size(32.dp)
+                                        modifier = Modifier.size(32.dp).semantics { contentDescription = "Agregar una unidad de ${line.product.name}" }
                                     ) { Text("+") }
                                 }
                                 TextButton(onClick = { vm.remove(line.product.id) }) { Text("Quitar", fontSize = 12.sp) }
