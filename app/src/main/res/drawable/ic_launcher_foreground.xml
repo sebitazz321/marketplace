@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp" android:height="108dp"
+    android:viewportWidth="108" android:viewportHeight="108">
+    <!-- Asa de la bolsa -->
+    <path android:strokeColor="#FFFFFF" android:strokeWidth="4.5" android:strokeLineCap="round" android:fillColor="#00000000"
+        android:pathData="M45,46 V40 a9,9 0 0,1 18,0 V46" />
+    <!-- Cuerpo de la bolsa -->
+    <path android:fillColor="#FFFFFF" android:pathData="M35,44 h38 l3,32 a5,5 0 0,1 -5,5.5 h-34 a5,5 0 0,1 -5,-5.5 Z" />
+    <!-- Franja de la bolsa -->
+    <path android:fillColor="#CDEFE9" android:pathData="M34.4,51 h39.2 l0.5,5 h-40.2 Z" />
+    <!-- Insignia naranja (etiqueta de precio) -->
+    <path android:fillColor="#F2762E" android:pathData="M59.5,72 a9.5,9.5 0 1,0 19.0,0 a9.5,9.5 0 1,0 -19.0,0 Z" />
+    <path android:fillColor="#FFFFFF" android:pathData="M66,72 a3,3 0 1,0 6,0 a3,3 0 1,0 -6,0 Z" />
+</vector>
